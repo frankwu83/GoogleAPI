@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">	
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<link href="./css/demo1.css" rel="stylesheet">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="./js/demo1.js"></script>
+<title>Places Autocomplete</title>
+<style>
+      input {
+        border: 1px solid  rgba(0, 0, 0, 0.5);
+      }
+      input.notfound {
+        border: 2px solid  rgba(255, 0, 0, 0.4);
+      }
+    </style>
+</head>
+
+<body>
+<div id="panel" style="margin-left: -260px">Start:
+      <input id="searchTextField" type="text" size="20">
+      End:
+      <input id="searchTextFieldEnd" type="text" size="20">
+      <input type="button" id="but_search" value="Search">
+</div>
+<div id="map-canvas"></div>
+</body>
+</html>
