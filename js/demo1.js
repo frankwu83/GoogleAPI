@@ -1,14 +1,18 @@
 // JavaScript Document
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
 function initialize() {
+	directionsDisplay = new google.maps.DirectionsRenderer();
   var mapOptions = {
     center: new google.maps.LatLng(32.763951,-117.2235),
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
+  	map = new google.maps.Map(document.getElementById('map-canvas'),
     mapOptions);
-
-  var input = /** @type {HTMLInputElement} */(document.getElementById('searchTextField'));
+	directionsDisplay.setMap(map);
+  var input = /** @type {HTMLInputElement} */(document.getElementById('txt_start'));
   var autocomplete = new google.maps.places.Autocomplete(input);
 
   autocomplete.bindTo('bounds', map);
@@ -57,6 +61,22 @@ function initialize() {
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
     infowindow.open(map, marker);
+  });
+}
+
+function calcRoute() {
+  var start = document.getElementById('txt_start').value;
+  var end = document.getElementById('txt_end').value;
+  //alert(end);
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.DirectionsTravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
   });
 }
 
